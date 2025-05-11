@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  n8n:
+    image: n8nio/n8n:latest   # Sempre há tags versionadas; fixe em produção
+    restart: unless-stopped
+    ports:
+      - "${N8N_PORT}:5678"
+    env_file: .env
+    volumes:
+      - n8n_data:/home/node/.n8n   # Workflows, credenciais, logs
+    # Opcional: define UID/GID se tiver problema de permissão em Linux
+    # user: "${UID}:${GID}"
+
+volumes:
+  n8n_data:
